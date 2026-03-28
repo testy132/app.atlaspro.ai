@@ -1,50 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Protected by Sahil</title>
+    <title>Subdomain Takeover by Rakesh Kumar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap" rel="stylesheet">
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            margin: 0;
-            padding: 0;
+            background: #080c10;
+            font-family: 'Space Mono', monospace;
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #282c35; /* Dark background color */
-            color: #61dafb; /* Text color */
-            font-family: 'Arial', sans-serif;
+            justify-content: center;
+            overflow: hidden;
         }
 
-        .pwd-container {
+        /* Subtle radial glow */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.07) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .card {
+            position: relative;
+            width: min(460px, 92vw);
+            background: #0d1520;
+            border: 1px solid #1a2a3a;
+            border-radius: 16px;
+            padding: 52px 44px 44px;
             text-align: center;
-            padding: 20px;
-            background-color: #383c49; /* Container background color */
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            box-shadow:
+                0 0 0 1px rgba(56,189,248,0.06),
+                0 30px 80px rgba(0,0,0,0.6),
+                0 0 40px rgba(56,189,248,0.04) inset;
+            animation: rise 0.8s cubic-bezier(0.16,1,0.3,1) both;
         }
 
-        .pwd-text {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(30px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        .signature {
-            font-size: 16px;
-            color: #a9a9a9; /* Lighter text color */
+        /* Top glow line */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 15%; right: 15%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #38bdf8, #818cf8, transparent);
+            border-radius: 1px;
+        }
+
+        /* Flag icon ring */
+        .icon-wrap {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(56,189,248,0.1), rgba(129,140,248,0.1));
+            border: 1px solid rgba(56,189,248,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 28px;
+            box-shadow: 0 0 30px rgba(56,189,248,0.12);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(56,189,248,0.1); }
+            to   { box-shadow: 0 0 40px rgba(56,189,248,0.25); }
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #e2e8f0 30%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .poc-tag {
+            display: inline-block;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #38bdf8;
+            background: rgba(56,189,248,0.08);
+            border: 1px solid rgba(56,189,248,0.18);
+            border-radius: 20px;
+            padding: 4px 14px;
+            margin-bottom: 36px;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #1a2a3a, transparent);
+            margin-bottom: 28px;
+        }
+
+        .by-line {
+            font-size: 12px;
+            color: #4a6075;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .by-line strong {
+            color: #94a3b8;
+            font-weight: 700;
         }
     </style>
 </head>
-
 <body>
-    <div class="pwd-container">
-        <div class="pwd-text">Pwd by D Beast</div>
-        <div class="signature">Subdomain Takeover</div>
+    <div class="card">
+        <div class="icon-wrap">🚩</div>
+        <h1>Subdomain Takeover</h1>
+        <div class="poc-tag">Proof of Concept</div>
+        <div class="divider"></div>
+        <p class="by-line">Discovered by <strong>Rakesh Kumar</strong></p>
     </div>
 </body>
-
 </html>
