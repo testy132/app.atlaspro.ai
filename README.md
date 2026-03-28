@@ -1,2 +1,2 @@
-# app.atlaspro.ai
-PwD by D Beast
+# mind.alan.eu
+PwD by Rakesh Kumar
